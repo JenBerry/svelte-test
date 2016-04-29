@@ -14,16 +14,21 @@ const data = [
 		{code:"driver_ref_no", desc:"Filter using the Ref No of a Driver", selected: false, category:"driver", visible:true},
 ];
 
-const Filter = (props) => {
-	return (
-		<div className='filter' data-code={props.code}>
-			<span>{props.code} </span>
-			<input type='text' />
-			{' '}
-			<span className='close' onClick={props.onClick}>x</span>
-		</div>
-	);
-};
+const Filter = React.createClass ({
+	componentDidMount(){
+		ReactDOM.findDOMNode(this.refs.nameInput).focus();
+	},
+	render(){
+		return (
+			<div className='filter' data-code={this.props.code}>
+				<span>{this.props.code} </span>
+				<input type='text' ref="nameInput" />
+				{' '}
+				<span className='close' onClick={this.props.onClick}>x</span>
+			</div>
+		);
+	}
+});
 const FilterBox = React.createClass({
 	handleClick(code){
 		this.props.removeFilter(code);
